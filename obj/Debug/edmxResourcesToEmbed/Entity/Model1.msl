@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище session_1ModelContainer" CdmEntityContainer="session_1Entities">
+    <EntitySetMapping Name="assetgroups">
+      <EntityTypeMapping TypeName="session_1Model.assetgroups">
+        <MappingFragment StoreEntitySet="assetgroups">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="assetphotos">
+      <EntityTypeMapping TypeName="session_1Model.assetphotos">
+        <MappingFragment StoreEntitySet="assetphotos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetPhoto" ColumnName="AssetPhoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="assets">
+      <EntityTypeMapping TypeName="session_1Model.assets">
+        <MappingFragment StoreEntitySet="assets">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssetSN" ColumnName="AssetSN" />
+          <ScalarProperty Name="AssetName" ColumnName="AssetName" />
+          <ScalarProperty Name="DepartmentLocationID" ColumnName="DepartmentLocationID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="AssetGroupID" ColumnName="AssetGroupID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="WarrantyDate" ColumnName="WarrantyDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="assettransferlogs">
+      <EntityTypeMapping TypeName="session_1Model.assettransferlogs">
+        <MappingFragment StoreEntitySet="assettransferlogs">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+          <ScalarProperty Name="FromAssetSN" ColumnName="FromAssetSN" />
+          <ScalarProperty Name="ToAssetSN" ColumnName="ToAssetSN" />
+          <ScalarProperty Name="FromDepartmentLocationID" ColumnName="FromDepartmentLocationID" />
+          <ScalarProperty Name="ToDepartmentLocationID" ColumnName="ToDepartmentLocationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departmentlocations">
+      <EntityTypeMapping TypeName="session_1Model.departmentlocations">
+        <MappingFragment StoreEntitySet="departmentlocations">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departments">
+      <EntityTypeMapping TypeName="session_1Model.departments">
+        <MappingFragment StoreEntitySet="departments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="session_1Model.employees">
+        <MappingFragment StoreEntitySet="employees">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="locations">
+      <EntityTypeMapping TypeName="session_1Model.locations">
+        <MappingFragment StoreEntitySet="locations">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

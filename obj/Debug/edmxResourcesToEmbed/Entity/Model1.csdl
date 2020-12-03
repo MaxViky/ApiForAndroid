@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="session_1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="assetgroups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="assets" Relationship="Self.FK_Assets_AssetGroups" FromRole="assetgroups" ToRole="assets" />
+  </EntityType>
+  <EntityType Name="assetphotos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetID" Type="Int64" Nullable="false" />
+    <Property Name="AssetPhoto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="assets" Relationship="Self.FK_AssetPhotos_Assets" FromRole="assetphotos" ToRole="assets" />
+  </EntityType>
+  <EntityType Name="assets">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AssetName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DepartmentLocationID" Type="Int64" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int64" Nullable="false" />
+    <Property Name="AssetGroupID" Type="Int64" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WarrantyDate" Type="DateTime" />
+    <NavigationProperty Name="assetgroups" Relationship="Self.FK_Assets_AssetGroups" FromRole="assets" ToRole="assetgroups" />
+    <NavigationProperty Name="assetphotos" Relationship="Self.FK_AssetPhotos_Assets" FromRole="assets" ToRole="assetphotos" />
+    <NavigationProperty Name="departmentlocations" Relationship="Self.FK_Assets_DepartmentLocations" FromRole="assets" ToRole="departmentlocations" />
+    <NavigationProperty Name="employees" Relationship="Self.FK_Assets_Employees" FromRole="assets" ToRole="employees" />
+    <NavigationProperty Name="assettransferlogs" Relationship="Self.FK_AssetTransfers_Assets" FromRole="assets" ToRole="assettransferlogs" />
+  </EntityType>
+  <EntityType Name="assettransferlogs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetID" Type="Int64" Nullable="false" />
+    <Property Name="TransferDate" Type="DateTime" Nullable="false" />
+    <Property Name="FromAssetSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ToAssetSN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FromDepartmentLocationID" Type="Int64" Nullable="false" />
+    <Property Name="ToDepartmentLocationID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="assets" Relationship="Self.FK_AssetTransfers_Assets" FromRole="assettransferlogs" ToRole="assets" />
+    <NavigationProperty Name="departmentlocations" Relationship="Self.FK_AssetTransferLogs_DepartmentLocations" FromRole="assettransferlogs" ToRole="departmentlocations" />
+    <NavigationProperty Name="departmentlocations1" Relationship="Self.FK_AssetTransferLogs_DepartmentLocations1" FromRole="assettransferlogs" ToRole="departmentlocations" />
+  </EntityType>
+  <EntityType Name="departmentlocations">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentID" Type="Int64" Nullable="false" />
+    <Property Name="LocationID" Type="Int64" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" />
+    <NavigationProperty Name="assets" Relationship="Self.FK_Assets_DepartmentLocations" FromRole="departmentlocations" ToRole="assets" />
+    <NavigationProperty Name="assettransferlogs" Relationship="Self.FK_AssetTransferLogs_DepartmentLocations" FromRole="departmentlocations" ToRole="assettransferlogs" />
+    <NavigationProperty Name="assettransferlogs1" Relationship="Self.FK_AssetTransferLogs_DepartmentLocations1" FromRole="departmentlocations" ToRole="assettransferlogs" />
+    <NavigationProperty Name="departments" Relationship="Self.FK_DepartmentLocations_Departments" FromRole="departmentlocations" ToRole="departments" />
+    <NavigationProperty Name="locations" Relationship="Self.FK_DepartmentLocations_Locations" FromRole="departmentlocations" ToRole="locations" />
+  </EntityType>
+  <EntityType Name="departments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="departmentlocations" Relationship="Self.FK_DepartmentLocations_Departments" FromRole="departments" ToRole="departmentlocations" />
+  </EntityType>
+  <EntityType Name="employees">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="assets" Relationship="Self.FK_Assets_Employees" FromRole="employees" ToRole="assets" />
+  </EntityType>
+  <EntityType Name="locations">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="departmentlocations" Relationship="Self.FK_DepartmentLocations_Locations" FromRole="locations" ToRole="departmentlocations" />
+  </EntityType>
+  <Association Name="FK_Assets_AssetGroups">
+    <End Role="assetgroups" Type="Self.assetgroups" Multiplicity="1" />
+    <End Role="assets" Type="Self.assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="assetgroups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assets">
+        <PropertyRef Name="AssetGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetPhotos_Assets">
+    <End Role="assets" Type="Self.assets" Multiplicity="1" />
+    <End Role="assetphotos" Type="Self.assetphotos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="assets">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assetphotos">
+        <PropertyRef Name="AssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assets_DepartmentLocations">
+    <End Role="departmentlocations" Type="Self.departmentlocations" Multiplicity="1" />
+    <End Role="assets" Type="Self.assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departmentlocations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assets">
+        <PropertyRef Name="DepartmentLocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assets_Employees">
+    <End Role="employees" Type="Self.employees" Multiplicity="1" />
+    <End Role="assets" Type="Self.assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assets">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTransfers_Assets">
+    <End Role="assets" Type="Self.assets" Multiplicity="1" />
+    <End Role="assettransferlogs" Type="Self.assettransferlogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="assets">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assettransferlogs">
+        <PropertyRef Name="AssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTransferLogs_DepartmentLocations">
+    <End Role="departmentlocations" Type="Self.departmentlocations" Multiplicity="1" />
+    <End Role="assettransferlogs" Type="Self.assettransferlogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departmentlocations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assettransferlogs">
+        <PropertyRef Name="FromDepartmentLocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTransferLogs_DepartmentLocations1">
+    <End Role="departmentlocations" Type="Self.departmentlocations" Multiplicity="1" />
+    <End Role="assettransferlogs" Type="Self.assettransferlogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departmentlocations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="assettransferlogs">
+        <PropertyRef Name="ToDepartmentLocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentLocations_Departments">
+    <End Role="departments" Type="Self.departments" Multiplicity="1" />
+    <End Role="departmentlocations" Type="Self.departmentlocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="departmentlocations">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentLocations_Locations">
+    <End Role="locations" Type="Self.locations" Multiplicity="1" />
+    <End Role="departmentlocations" Type="Self.departmentlocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="departmentlocations">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="session_1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="assetgroups" EntityType="Self.assetgroups" />
+    <EntitySet Name="assetphotos" EntityType="Self.assetphotos" />
+    <EntitySet Name="assets" EntityType="Self.assets" />
+    <EntitySet Name="assettransferlogs" EntityType="Self.assettransferlogs" />
+    <EntitySet Name="departmentlocations" EntityType="Self.departmentlocations" />
+    <EntitySet Name="departments" EntityType="Self.departments" />
+    <EntitySet Name="employees" EntityType="Self.employees" />
+    <EntitySet Name="locations" EntityType="Self.locations" />
+    <AssociationSet Name="FK_Assets_AssetGroups" Association="Self.FK_Assets_AssetGroups">
+      <End Role="assetgroups" EntitySet="assetgroups" />
+      <End Role="assets" EntitySet="assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetPhotos_Assets" Association="Self.FK_AssetPhotos_Assets">
+      <End Role="assets" EntitySet="assets" />
+      <End Role="assetphotos" EntitySet="assetphotos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assets_DepartmentLocations" Association="Self.FK_Assets_DepartmentLocations">
+      <End Role="departmentlocations" EntitySet="departmentlocations" />
+      <End Role="assets" EntitySet="assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assets_Employees" Association="Self.FK_Assets_Employees">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="assets" EntitySet="assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTransfers_Assets" Association="Self.FK_AssetTransfers_Assets">
+      <End Role="assets" EntitySet="assets" />
+      <End Role="assettransferlogs" EntitySet="assettransferlogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTransferLogs_DepartmentLocations" Association="Self.FK_AssetTransferLogs_DepartmentLocations">
+      <End Role="departmentlocations" EntitySet="departmentlocations" />
+      <End Role="assettransferlogs" EntitySet="assettransferlogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTransferLogs_DepartmentLocations1" Association="Self.FK_AssetTransferLogs_DepartmentLocations1">
+      <End Role="departmentlocations" EntitySet="departmentlocations" />
+      <End Role="assettransferlogs" EntitySet="assettransferlogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentLocations_Departments" Association="Self.FK_DepartmentLocations_Departments">
+      <End Role="departments" EntitySet="departments" />
+      <End Role="departmentlocations" EntitySet="departmentlocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentLocations_Locations" Association="Self.FK_DepartmentLocations_Locations">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="departmentlocations" EntitySet="departmentlocations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
